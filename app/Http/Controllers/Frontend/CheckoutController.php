@@ -8,6 +8,7 @@ use App\Models\Product;
 use App\Models\Order;
 use App\Models\User;
 use App\Models\OrderItem;
+use App\Models\Wishlist;
 use Auth;
 use Illuminate\Http\Request;
 
@@ -16,14 +17,12 @@ class CheckoutController extends Controller
     public function index()
     {
         $old_cartItems = Cart::where('user_id', Auth::id())->get();
-        foreach($old_cartItems as $item)
-        {
-            if(!Product::where('id', $item->prod_id)->where('qty', '>=', $item->prod_qty)->exists())
-            {
+        foreach ($old_cartItems as $item) {
+            if (!Product::where('id', $item->prod_id)->where('qty', '>=', $item->prod_qty)->exists()) {
                 $removeItem = Cart::where('user_id', Auth::id())->where('prod_id', $item->prod_id)->first();
                 $removeItem->delete();
             }
-        }    
+        }
         $cartItems = Cart::where('user_id', Auth::id())->get();
 
         return view('frontend.checkout', compact('cartItems'));
@@ -47,14 +46,13 @@ class CheckoutController extends Controller
 
         $order->payment_mode   = $request->payment_mode;
         $order->payment_id     = $request->payment_id;
-        
-        
+
+
         //To Calculate the total price
         $total = 0;
 
         $cartitems_total = Cart::where('user_id', Auth::id())->get();
-        foreach ($cartitems_total as $prod)
-        {
+        foreach ($cartitems_total as $prod) {
             $total += $prod->products->selling_price * $prod->prod_qty;
         }
 
@@ -62,16 +60,15 @@ class CheckoutController extends Controller
 
         $order->total_price = $request->total_price;
 
-        
 
-        $order->tracking_no = 'sharma'.rand(1111,9999);
+
+        $order->tracking_no = 'sharma' . rand(1111, 9999);
         $order->save();
 
 
 
         $cartItems = Cart::where('user_id', Auth::id())->get();
-        foreach($cartItems as $item)
-        {
+        foreach ($cartItems as $item) {
             OrderItem::create([
                 'order_id' => $order->id,
                 'prod_id' => $item->prod_id,
@@ -84,8 +81,7 @@ class CheckoutController extends Controller
             $prod->update();
         }
 
-        if(Auth::user()->adress1 == NULL)
-        {
+        if (Auth::user()->adress1 == NULL) {
             $user = User::where('id', Auth::id())->first();
 
             $user->name     = $request->fname;
@@ -104,8 +100,10 @@ class CheckoutController extends Controller
         $cartItems = Cart::where('user_id', Auth::id())->get();
         Cart::destroy($cartItems);
 
-        if($request->payment_mode == "Paid by Razorpay")
-        {
+        $wishlistItems = Wishlist::where('user_id', Auth::id())->get();
+        Wishlist::destroy($wishlistItems);
+
+        if ($request->payment_mode == "Paid by Razorpay") {
             return response()->json(['status' => "Order placed Successfully"]);
         }
         return redirect('/')->with('status', "Order placed Successfully");
@@ -115,8 +113,7 @@ class CheckoutController extends Controller
     {
         $cartItems = Cart::where('user_id', Auth::id())->get();
         $total_price = 0;
-        foreach($cartItems as $item)
-        {
+        foreach ($cartItems as $item) {
             $total_price += $item->products->selling_price * $item->prod_qty;
         }
 
@@ -144,7 +141,5 @@ class CheckoutController extends Controller
             'pincode'     => $pincode,
             'total_price' => $total_price,
         ]);
-        
     }
 }
-
