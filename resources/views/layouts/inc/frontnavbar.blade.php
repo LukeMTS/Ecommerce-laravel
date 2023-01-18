@@ -7,7 +7,7 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav ms-auto">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Home</a>
+          <a class="nav-link active" aria-current="page" href="/">Home</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="{{ url('category') }}">Category</a>
@@ -23,30 +23,30 @@
           </a>
         </li>
         @guest
-          @if (Route::has('login'))
-            <li>
-              <a class="nav-link" href="{{ route('login') }}">{{ __('login') }}</a>
-            </li>
-          @endif
-          @if (Route::has('register'))
-            <li class="nav-item">
-              <a class="nav-link" href="{{ route('register') }}">
-                {{ __('register') }}
-              </a>
-            </li>
-          @endif
+        @if (Route::has('login'))
+        <li>
+          <a class="nav-link" href="{{ route('login') }}">{{ __('login') }}</a>
+        </li>
+        @endif
+        @if (Route::has('register'))
+        <li class="nav-item">
+          <a class="nav-link" href="{{ route('register') }}">
+            {{ __('register') }}
+          </a>
+        </li>
+        @endif
         @else
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             {{ Auth::user()->name }}
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <li>  
+            <li>
               <a class="dropdown-item" href="{{ url('my-orders') }}">
                 My Orders
               </a>
             </li>
-           <li>  
+            <li>
               <a class="dropdown-item" href="#">
                 My Profile
               </a>
@@ -61,11 +61,11 @@
             </li>
           </ul>
         </li>
-      @endguest
-      <form class="d-flex" role="search">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success" type="submit">Search</button>
-      </form>
+        @endguest
+        <form class="d-flex" role="search">
+          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success" type="submit">Search</button>
+        </form>
     </div>
   </div>
 </nav>
