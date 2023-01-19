@@ -50,13 +50,14 @@ My Cart
           @endif
         </div>
         @if($item->products->qty > 0)
-        <div class="col-md-2">
-          <button class="btn btn-success addToCartBtn"> <i class="fa fa-shopping-cart"></i>Add to Cart</button>
+        <div class="col-md-4">
+          <button class="btn btn-success mt-4 addToCartBtn">Add to Cart</button>
+          <button class="btn btn-danger mt-4 delete-wishlist-item">Remove</button>
         </div>
         @endif
-        <div class="col-md-2">
-          <button class="btn btn-danger delete-wishlist-item"> <i class="fa fa-trash"></i>Remove</button>
-        </div>
+        <!-- <div class="col-md-2">
+          <button class="btn btn-danger mt-4 delete-wishlist-item">Remove</button>
+        </div> -->
       </div>
       @endforeach
       @else

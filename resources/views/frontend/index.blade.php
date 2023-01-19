@@ -11,12 +11,31 @@ Welcome to E-shop
   <div class="container">
     <div class="row">
       <h2>Featured Products</h2>
-      <div class="owl-carousel featured-carousel owl-theme">
+
+      <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner">
+          @foreach ($featured_products as $key => $prod)
+          <div class="carousel-item {{ $key == 0 ? 'active' : '' }}">
+            <img class="d-block w-100" src="{{ asset('assets/uploads/product/'.$prod->image) }}" alt="Product Image">
+          </div>
+          @endforeach
+        </div>
+        <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="sr-only">Next</span>
+        </a>
+      </div>
+
+      <!-- <div class="owl-carousel featured-carousel owl-theme">
         @foreach ($featured_products as $prod)
         <div class="item">
           <a href="{{ url('category/'.$prod->category->slug.'/'.$prod->slug) }}">
             <div class="card">
-              <img src="{{ asset('assets/uploads/product/'.$prod->image) }}" alt="Product Image">
+              <img class="" src="{{ asset('assets/uploads/product/'.$prod->image) }}" alt="Product Image">
               <div class="card-body">
                 <h5>{{ $prod->name }}</h5>
                 <span class="float-start">{{ $prod->selling_price }}</span>
@@ -26,7 +45,7 @@ Welcome to E-shop
           </a>
         </div>
         @endforeach
-      </div>
+      </div> -->
     </div>
   </div>
 </div>
