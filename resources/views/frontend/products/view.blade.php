@@ -4,6 +4,41 @@
 
 
 @section('content')
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+        <form action="{{ url('/add-rating') }}" method="POST"></form>
+          @csrf
+          <input type="hidden" name="product_id" value="{{ $products->id }}">
+          <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Rate {{ $products->name }}</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div class="rating-css">
+              <i class="fa fa-star" aria-hidden="true"></i>
+              <div class="star-icon">
+                  <input type="radio" value="1" name="product_rating" checked id="rating1">
+                  <label for="rating1" class="fa fa-star"></label>
+                  <input type="radio" value="2" name="product_rating" id="rating2">
+                  <label for="rating2" class="fa fa-star"></label>
+                  <input type="radio" value="3" name="product_rating" id="rating3">
+                  <label for="rating3" class="fa fa-star"></label>
+                  <input type="radio" value="4" name="product_rating" id="rating4">
+                  <label for="rating4" class="fa fa-star"></label>
+                  <input type="radio" value="5" name="product_rating" id="rating5">
+                  <label for="rating5" class="fa fa-star"></label>
+              </div>
+            </div>  
+          </div>
+          <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary">Submit</button>
+          </div>
+        </form>
+    </div>
+  </div>
+</div>
 
 <div class="py-3 mb-4 shadow-sm bg-warning border-top">
   <div class="container">
@@ -75,6 +110,12 @@
       <p class="mt-3">
         {!! $products->description !!}
       </p>
+          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            Rate this product
+          </button>
+          
+      </div>
+
     </div>
   </div>
 </div>

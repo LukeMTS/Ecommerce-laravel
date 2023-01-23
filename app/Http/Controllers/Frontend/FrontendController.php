@@ -23,7 +23,6 @@ class FrontendController extends Controller
     public function category()
     {
         $category = Category::where('status', '1')->get();
-
         return view('frontend.category', compact('category'));
     }
 
@@ -31,7 +30,7 @@ class FrontendController extends Controller
     {
         if (Category::where('slug', $slug)->exists()) {
             $category  = Category::where('slug', $slug)->first();
-            $products  = Product::where('cate_id', $category->id)->where('status', '0')->get();
+            $products  = Product::where('cate_id', $category->id)->where('status', '1')->get();
 
             return view('frontend.products.index', compact('category', 'products'));
         } else {
