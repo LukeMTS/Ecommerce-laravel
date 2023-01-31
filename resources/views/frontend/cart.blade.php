@@ -51,7 +51,7 @@ My Cart
           @endif
         </div>
         <div class="col-md-2">
-          <button class="btn btn-danger mt-4 delete-cart-item">Remove</button>
+          <button class="btn btn-danger  mt-4 delete-cart-item"> <i class="bi bi-trash"></i>Remove</button>
         </div>
       </div>
       @endforeach

@@ -10,7 +10,10 @@
   <title>{{ config('app.name', 'Laravel') }}</title>
 
   <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+  {{-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css"> --}}
+
+  <link rel="stylesheet" href="https://kit.fontawesome.com/2e49bd34cd.css" crossorigin="anonymous">
+    <script src="https://kit.fontawesome.com/2e49bd34cd.js" crossorigin="anonymous"></script>
 
   <link href="/admin/css/material-dashboard.css" rel="stylesheet">
   <link href="/admin/css/custom.css" rel="stylesheet">

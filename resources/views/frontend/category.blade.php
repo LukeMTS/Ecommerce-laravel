@@ -17,8 +17,8 @@ Category
               <div class="item card">
                 <img src="{{ asset('assets/uploads/category/'.$cate->image) }}" class="order-images" alt="Category Image">
                 <div class="card-body">
-                  <h5>{{ $cate->name }}</h5>
-                  <p class="order-text">
+                  <h5 class="order-text">{{ $cate->name }}</h5>
+                  <p class="descript-text">
                     {{ $cate->description }}
                   </p>
                 </div>

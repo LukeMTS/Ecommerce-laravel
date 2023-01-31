@@ -55,7 +55,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('my-orders', [UserController::class, 'index']);
     Route::get('view-order/{id}', [UserController::class, 'view']);
 
-    Route::get('add-rating', [RatingController::class, 'add']);
+    Route::post('add-rating', [RatingController::class, 'add']);
 
     Route::get('wishlist', [WishlistController::class, 'index']);
 

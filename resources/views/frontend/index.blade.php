@@ -61,8 +61,8 @@ Welcome to E-shop
             <div class="card">
               <img src="{{ asset('assets/uploads/category/'.$tcategory->image) }}" class="order-images" alt="Category Image">
               <div class="card-body">
-                <h5>{{ $tcategory->name }}</h5>
-                <p class="order-text">
+                <h5 class="order-text">{{ $tcategory->name }}</h5>
+                <p class="descript-text">
                   {{ $tcategory->description }}
                 </p>
               </div>

@@ -6,6 +6,7 @@ use App\Models\Product;
 use App\Models\Category;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Rating;
 use Auth;
 
 class FrontendController extends Controller
@@ -40,14 +41,24 @@ class FrontendController extends Controller
 
     public function productview($cate_slug, $prod_slug)
     {
-        if (Category::where('slug', $cate_slug)->exists()) {
-            if (Product::where('slug', $prod_slug)->exists()) {
+        if (Category::where('slug', $cate_slug)->exists()) 
+        {
+            if (Product::where('slug', $prod_slug)->exists()) 
+            {
                 $products = Product::where('slug', $prod_slug)->first();
-                return view('frontend.products.view', compact('products'));
-            } else {
+                $ratings = Rating::where('prod_id', $products->id)->get();
+                $ratings_avg = Rating::where('prod_id', $products->id)->avg('stars_rated');
+                $user_rating = Rating::where('prod_id', $products->id)->where('user_id', Auth::id())->first();
+            
+                return view('frontend.products.view', compact('products', 'ratings', 'ratings_avg', 'user_rating'));
+            } 
+            else 
+            {
                 return redirect('/')->with('status', 'The link was broken');
             }
-        } else {
+        } 
+        else 
+        {
             return redirect('/')->with('status', 'The link was broken');
         }
     }
